@@ -54,6 +54,7 @@ class CustomSearch extends SearchDelegate {
       }
     }
 
+
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {

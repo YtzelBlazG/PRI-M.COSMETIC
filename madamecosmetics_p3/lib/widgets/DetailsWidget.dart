@@ -127,9 +127,9 @@ class ProductPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 250.0,
+                height: 350.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(16.0),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
@@ -168,7 +168,7 @@ class ProductPage extends StatelessWidget {
                     style: TextStyle(fontSize: 18.0, color: Colors.black54),
                   ),
                   Text(
-                    '\$${product.priceBase.toString()}',
+                    '${product.priceBase.toString()} \Bs',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
@@ -182,7 +182,7 @@ class ProductPage extends StatelessWidget {
                     style: TextStyle(fontSize: 18.0, color: Colors.black54),
                   ),
                   Text(
-                    '\$${product.priceOfert.toString()}',
+                    '${product.priceOfert.toString()} \Bs',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],

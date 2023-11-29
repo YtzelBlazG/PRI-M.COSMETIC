@@ -7,12 +7,11 @@ import 'package:madamecosmetics/models/Category.dart';
 import 'package:madamecosmetics/models/Product.dart';
 import 'package:madamecosmetics/pages/CartPage.dart';
 import 'package:madamecosmetics/pages/create_category.dart';
+import 'package:madamecosmetics/pages/login_screen.dart';
 import 'package:madamecosmetics/widgets/CategoriesWidget.dart';
 import 'package:madamecosmetics/widgets/CustomSearch.dart';
 import 'package:madamecosmetics/widgets/HomeAppBar.dart';
 import 'package:madamecosmetics/widgets/ItemsWidget.dart';
-
-import 'package:madamecosmetics/widgets/Product_Tile.dart';
 import 'package:madamecosmetics/widgets/TechSupportWidget.dart';
 import 'package:madamecosmetics/pages/CrudProductPage.dart';
 
@@ -36,7 +35,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchData() async {
-    var url = Uri.parse("http://192.168.1.10/mysql/SelectProduct.php");
+    var url = Uri.parse("http://192.168.56.1/mysql/SelectProduct.php");
+
     try {
       final response = await http.get(url);
       print('Response status: ${response.statusCode}');
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red, // Puedes cambiar el color si lo deseas
+        backgroundColor: Colors.red,
       ),
     );
   }
@@ -180,15 +180,18 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       SizedBox(width: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddCategoryScreen()),
-                          );
-                        },
-                        child: Text('Agregar nueva categoría'),
+                      Visibility(
+                        visible: LoginScreen.aux == 1,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddCategoryScreen()),
+                            );
+                          },
+                          child: Text('Agregar nueva categoría'),
+                        ),
                       ),
                     ],
                   ),
@@ -198,32 +201,7 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.centerLeft,
                   margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   child: Text(
-                    "Mejor Vendido",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 200,
-                  child: isLoading
-                      ? Center(child: CircularProgressIndicator())
-                      : ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: productMenu.length,
-                          itemBuilder: (context, index) => ProductTile(
-                            product: productMenu[index],
-                          ),
-                        ),
-                ),
-                const SizedBox(height: 15),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  child: Text(
-                    "Lista Productos",
+                    "Productos En Oferta",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -255,7 +233,7 @@ class _HomePageState extends State<HomePage> {
           }
         },
         height: 70,
-        color: Colors.green,
+        color: Colors.lightGreenAccent,
         index: _selectedIndex,
         items: const [
           Icon(
@@ -275,30 +253,32 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          // Navegar a la pantalla AddItemScreen al presionar el botón
-          var categories = await getCategory();
+      floatingActionButton: Visibility(
+        visible: LoginScreen.aux == 1,
+        child: FloatingActionButton(
+          onPressed: () async {
+            var categories = await getCategory();
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AddItemScreen(
-                    categories: [
-                          Category(
-                              id: 0, nameCategory: "Seleccione una categoría")
-                        ] +
-                        categories)),
-          );
-        },
-        child: Icon(Icons.add),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddItemScreen(
+                      categories: [
+                            Category(
+                                id: 0, nameCategory: "Seleccione una categoría")
+                          ] +
+                          categories)),
+            );
+          },
+          child: Icon(Icons.add),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
   Future<List<Category>> getCategory() async {
-    var url = Uri.parse("http://192.168.1.10/mysql/Categoryinsert.php");
+    var url = Uri.parse("http://192.168.56.1/mysql/Categoryinsert.php");
     try {
       var response = await http.get(url);
       print("Respuesta del servidor: ${response.body}");

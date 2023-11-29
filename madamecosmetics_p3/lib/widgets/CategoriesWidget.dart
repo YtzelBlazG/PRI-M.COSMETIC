@@ -58,7 +58,7 @@ class CategoriesWidget extends StatelessWidget {
 }
 
 Future<List<Category>> fetchCategories() async {
-  var url = Uri.parse("http://192.168.1.10/mysql/CategoryInsert.php");
+  var url = Uri.parse("http://192.168.56.1/mysql/CategoryInsert.php");
   var response = await http.get(url);
 
   if (response.statusCode == 200) {

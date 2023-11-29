@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:madamecosmetics/pages/CartPage.dart';
+import 'package:madamecosmetics/pages/information.dart';
 import 'package:madamecosmetics/pages/login_screen.dart';
 import 'package:madamecosmetics/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           "/": (context) => LoginScreen(),
-          "cartPage": (context) => CartPage(),
+          "InformationScreen": (context) => InformationScreen(),
         },
       ),
     );

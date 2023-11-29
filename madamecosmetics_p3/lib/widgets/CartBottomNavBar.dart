@@ -12,7 +12,7 @@ class CartBottomNavBar extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           height: 150,
-          color: Color.fromARGB(255, 230, 219, 126),
+          color: Color.fromRGBO(255, 235, 59, 1.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

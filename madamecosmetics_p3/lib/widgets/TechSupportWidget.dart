@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:madamecosmetics/pages/HomePage.dart';
 import 'package:madamecosmetics/pages/form_screen.dart';
+
 class TechnicalSupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -53,13 +55,12 @@ class TechnicalSupport extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Regresar a la pantalla principal al presionar el botón
-          Navigator.of(context).pop();
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
         },
         child: Icon(Icons.arrow_back),
       ),
     );
   }
 }
-
-
-

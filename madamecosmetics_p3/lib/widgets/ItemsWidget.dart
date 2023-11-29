@@ -15,19 +15,15 @@ class ItemsWidget extends StatelessWidget {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.8,
+        childAspectRatio: 0.6, // Ajusta este valor según tus necesidades para controlar el tamaño de la imagen
       ),
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: products.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MyApp(product: products[index])),
-            );
-          },
+          
+          
           child: Container(
             padding: EdgeInsets.all(15),
             margin: EdgeInsets.all(8),
@@ -68,33 +64,40 @@ class ItemsWidget extends StatelessWidget {
                 SizedBox(height: 10),
                 Expanded(
                   child: Image.network(
-                      products[index].imageUrl.isNotEmpty
-                          ? products[index].imageUrl
-                          : 'https://t3.ftcdn.net/jpg/02/48/42/64/240_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg',
-                      fit: BoxFit.cover),
-
-                  // asset(
-                  //   "lib/img/${index + 1}.jpg",
-                  //   height: 200,
-                  //   width: 160,
-                  //   fit: BoxFit.contain,
-                  // ),
+                    products[index].imageUrl.isNotEmpty
+                        ? products[index].imageUrl
+                        : 'https://t3.ftcdn.net/jpg/02/48/42/64/240_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg',
+                    fit: BoxFit.cover,
+                    height: 180, // Ajusta esta altura según tus necesidades para hacer las imágenes más grandes
+                  ),
                 ),
                 SizedBox(height: 10),
                 Text(
                   products[index].nameProduct,
                   style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  products[index].description,
-                  style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyApp(product: products[index])),
+                    );
+                  },
+                  child: Text(
+                    "Ver más",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '\$${products[index].priceBase.toStringAsFixed(2)}',
+                      '${products[index].priceBase.toStringAsFixed(2)} \Bs',
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[700]),
                     ),
                     SizedBox(width: 10),

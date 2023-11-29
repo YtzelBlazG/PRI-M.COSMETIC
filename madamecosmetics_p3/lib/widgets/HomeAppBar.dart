@@ -1,5 +1,5 @@
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:madamecosmetics/pages/login_screen.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -9,11 +9,6 @@ class HomeAppBar extends StatelessWidget {
       padding: EdgeInsets.all(25),
       child: Row(
         children: [
-          Icon(
-            Icons.sort,
-            size: 30,
-            color: Colors.white,
-          ),
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Align(
@@ -29,24 +24,14 @@ class HomeAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          badges.Badge(
-            badgeColor: Colors.red,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text(
-              "3",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, "cartPage");
-              },
-              child: Icon(
-                Icons.shopping_bag_outlined,
-                size: 30,
-                color: Colors.white,
-              ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, "InformationScreen"); // Cambiado de "cartPage" a "InformationScreen"
+            },
+            child: Icon(
+              Icons.info,
+              size: 30,
+              color: Colors.white,
             ),
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:madamecosmetics/pages/HomePage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -12,20 +13,26 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController user = TextEditingController();
   TextEditingController pass = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  String selectedGender = 'Mujer';
+  String selectedCity = 'Cochabamba';
   String message = "";
 
   Future<void> register() async {
-    var url = Uri.parse("http://192.168.1.10/mysql/Register.php");
+    var url = Uri.parse("http://192.168.1.76/mysql/Register.php");
     try {
       var response = await http.post(url, body: {
         "username": user.text,
         "password": pass.text,
+        "phone": phone.text,
+        "gender": selectedGender,
+        "location": selectedCity,
       });
 
       var data = json.decode(response.body);
       if (data == "Error") {
         setState(() {
-          message = "Este usuario ya existe";
+          message = "Este usuario o número de teléfono ya existe.";
         });
       } else {
         setState(() {
@@ -37,6 +44,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         message = "Se produjo un error: $e";
       });
     }
+  }
+
+  bool validatePhoneNumber(String phoneNumber) {
+    RegExp regExp = RegExp(r'^\+?[0-7]+$');
+    return regExp.hasMatch(phoneNumber) &&
+        phoneNumber.length >= 8 &&
+        phoneNumber.length <= 30;
   }
 
   @override
@@ -112,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   _buildTextFieldWithIcon(
                     hintText: "Número de WhatsApp",
                     icon: Icons.phone,
-                    controller: TextEditingController(),
+                    controller: phone,
                   ),
                   SizedBox(height: 30),
                   _buildRegisterButton(),
@@ -144,22 +158,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.black,
-                        child: FaIcon(FontAwesomeIcons.instagram),
+                      GestureDetector(
+                        onTap: () async {
+                          const instagramUrl =
+                              'https://www.instagram.com/madame_natural_/';
+
+                          if (await canLaunch(instagramUrl)) {
+                            await launch(instagramUrl);
+                          } else {
+                            throw 'No se pudo abrir el enlace: $instagramUrl';
+                          }
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.black,
+                          child: FaIcon(
+                            color: Colors.white,
+                            FontAwesomeIcons.instagram,
+                          ),
+                        ),
                       ),
                       SizedBox(width: 50),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.black,
-                        child: FaIcon(FontAwesomeIcons.facebookF),
+                      GestureDetector(
+                        onTap: () async {
+                          const facebookUrl =
+                              'https://www.facebook.com/MadameNatural';
+
+                          if (await canLaunch(facebookUrl)) {
+                            await launch(facebookUrl);
+                          } else {
+                            throw 'No se pudo abrir el enlace: $facebookUrl';
+                          }
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.black,
+                          child: FaIcon(
+                            color: Colors.white,
+                            FontAwesomeIcons.facebookF,
+                          ),
+                        ),
                       ),
                       SizedBox(width: 50),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.black,
-                        child: FaIcon(FontAwesomeIcons.whatsapp),
+                      GestureDetector(
+                        onTap: () async {
+                          const whatsappUrl = 'https://wa.me/+59172778767';
+
+                          if (await canLaunch(whatsappUrl)) {
+                            await launch(whatsappUrl);
+                          } else {
+                            throw 'No se pudo abrir el enlace: $whatsappUrl';
+                          }
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.black,
+                          child: FaIcon(
+                            color: Colors.white,
+                            FontAwesomeIcons.whatsapp,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -201,6 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               borderRadius: BorderRadius.circular(50),
             ),
             focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(50),
             ),
           ),
@@ -209,6 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: Colors.black,
           radius: 35,
           child: Icon(
+            color: Colors.white,
             icon,
             size: 30,
           ),
@@ -222,8 +282,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       alignment: Alignment.centerLeft,
       children: [
         DropdownButtonFormField<String>(
-          value: 'Cochabamba',
-          onChanged: (value) {},
+          value: selectedCity,
+          onChanged: (value) {
+            setState(() {
+              selectedCity = value!;
+            });
+          },
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 80, vertical: 17),
             filled: true,
@@ -240,14 +304,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           items: [
             DropdownMenuItem(value: 'Cochabamba', child: Text('Cochabamba')),
-            DropdownMenuItem(value: 'Sucre', child: Text('Sucre')),
-            DropdownMenuItem(value: 'Potosí', child: Text('Potosí')),
+            DropdownMenuItem(value: 'LaPaz', child: Text('La Paz')),
+            DropdownMenuItem(value: 'Tarija', child: Text('Tarija')),
           ],
         ),
         CircleAvatar(
           backgroundColor: Colors.black,
           radius: 35,
           child: Icon(
+            color: Colors.white,
             Icons.location_on,
             size: 30,
           ),
@@ -277,6 +342,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             setState(() {
               message = "La contraseña debe tener al menos 6 caracteres.";
             });
+          } else if (user.text.toLowerCase() == 'admin') {
+            setState(() {
+              message = 'No está permitido el nombre de usuario "admin".';
+            });
+          } else if (!validatePhoneNumber(phone.text)) {
+            setState(() {
+              message = 'Número de teléfono no válido.';
+            });
           } else {
             register();
             Navigator.push(
@@ -287,6 +360,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             );
             user.clear();
             pass.clear();
+            phone.clear();
           }
         },
         style: ElevatedButton.styleFrom(
@@ -313,8 +387,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       alignment: Alignment.centerLeft,
       children: [
         DropdownButtonFormField<String>(
-          value: 'Mujer',
-          onChanged: (value) {},
+          value: selectedGender,
+          onChanged: (value) {
+            setState(() {
+              selectedGender = value!;
+            });
+          },
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 80, vertical: 17),
             filled: true,
@@ -339,6 +417,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: Colors.black,
           radius: 35,
           child: Icon(
+            color: Colors.white,
             Icons.groups_3_outlined,
             size: 30,
           ),

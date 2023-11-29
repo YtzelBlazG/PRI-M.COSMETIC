@@ -24,7 +24,7 @@ class _CartBottomNavBarState extends State<CartBottomNavBar> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           height: 150,
-          color: Color.fromARGB(255, 230, 219, 126),
+          color: Color.fromRGBO(255, 235, 59, 1.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -40,7 +40,7 @@ class _CartBottomNavBarState extends State<CartBottomNavBar> {
                     ),
                   ),
                   Text(
-                    "\$${widget.total}",
+                    "${widget.total} \Bs",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -78,7 +78,7 @@ class _CartBottomNavBarState extends State<CartBottomNavBar> {
   }
 
   _launchWhatsApp() async {
-    final phoneNumber = "+59177961504"; // Número de teléfono de WhatsApp
+    final phoneNumber = "+59172778767"; // Número de teléfono de WhatsApp
     final message = _buildWhatsAppMessage();
     final url = "https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}";
     final uri = Uri.parse(url);
@@ -97,7 +97,7 @@ class _CartBottomNavBarState extends State<CartBottomNavBar> {
       message += "-${cartItem.quantity} ${cartItem.title} \n";
     }
 
-    message += "\n Total: \$${widget.total}";
+    message += "\n Total: ${widget.total} \Bs";
 
     return message;
   }

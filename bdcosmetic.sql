@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 23, 2023 at 02:14 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-11-2023 a las 05:29:09
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bdcosmetic`
+-- Base de datos: `bdcosmetic`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Estructura de tabla para la tabla `category`
 --
 
 CREATE TABLE `category` (
@@ -32,19 +32,10 @@ CREATE TABLE `category` (
   `name_category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `name_category`) VALUES
-(1, 'Categeria 1'),
-(2, 'Categoría 2'),
-(3, 'Prueba Categoria');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Estructura de tabla para la tabla `product`
 --
 
 CREATE TABLE `product` (
@@ -60,30 +51,10 @@ CREATE TABLE `product` (
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`Id`, `Image`, `name_product`, `description_product`, `Catalogue`, `Stock`, `price_base`, `price_ofert`, `Status`, `category_id`) VALUES
-(2, '', 'jabon', '', '', '', 10, 11, '1', 1),
-(3, '', 'cepillo', '', '', '', 10, 12, '1', 1),
-(4, '', 'crema', '', '', '', 12, 10, '1', 1),
-(30, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700672609/neheolrcpevrvggwpvd1.jpg', 'Example Product', 'Description', 'Catalogue', '100', 19.99, 15.99, '1', 1),
-(31, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700672609/neheolrcpevrvggwpvd1.jpg', 'Example Product', 'Description', 'Catalogue', '100', 19.99, 15.99, '1', 1),
-(33, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700672609/neheolrcpevrvggwpvd1.jpg', 'Prueba', 'Test123', '123', '100', 100, 80, '1', 1),
-(34, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700675507/vgnr9byxrylyzechek7u.jpg', 'Test', 'Test', 'Test', '12', 123, 120, '1', 1),
-(35, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700675574/cniwltrsvuaxi000mkqv.jpg', '123', '123', '123', '10', 10, 1, '1', 1),
-(36, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700694091/qi3vmxaihwaakg83brod.jpg', 'Test ', '123', '123', '10', 100, 80, '1', 1),
-(37, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700694180/grr6yb0ayqprkk6dothh.jpg', 'Prueba 1234', '1234', '1234', '100', 10, 8, '1', 1),
-(38, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700694350/gkmz3fgtbam0s7jw20ej.jpg', 'Prueba', '1234', '1234', '100', 100, 80, '1', 1),
-(39, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700695618/g0fxpgqjuun9aothqt2a.jpg', 'PRODUCTO', 'CAT 2', 'PC2', '20', 50, 45, '1', 2),
-(40, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700699867/lxn6fvrt02muubsizgkc.jpg', 'Plnta', 'Planta', 'P1', '100', 50, 45, '1', 2),
-(41, 'https://res.cloudinary.com/da7fxpp2k/image/upload/v1700700758/pfawdhfk3rifhy5pfafl.jpg', 'Producto Prueba', 'Test 123', 'CP', '10', 50, 45, '1', 2);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `technical_support`
+-- Estructura de tabla para la tabla `technical_support`
 --
 
 CREATE TABLE `technical_support` (
@@ -94,106 +65,92 @@ CREATE TABLE `technical_support` (
   `Description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `technical_support`
---
-
-INSERT INTO `technical_support` (`id`, `Problem_title`, `Affair`, `Failed`, `Description`) VALUES
-(2, 'Fallo', 'Problemas', 'Login', 'no puedo iniciar session');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estructura de tabla para la tabla `user`
 --
 
 CREATE TABLE `user` (
   `Id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `Sex` varchar(50) NOT NULL,
+  `gender` varchar(50) NOT NULL,
   `location` varchar(50) NOT NULL,
-  `Num_washatpp` varchar(250) NOT NULL,
+  `phone` varchar(250) NOT NULL,
   `role` bit(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`Id`, `username`, `password`, `Sex`, `location`, `Num_washatpp`, `role`) VALUES
-(43, 'alejandra', '1234', '', '', '', b'00'),
-(44, 'jose', '1234', '', '', '', b'00'),
-(45, 'josefina', '123456', '', '', '', b'00'),
-(46, 'sadasd', 'asdasd', '', '', '', b'00'),
-(47, 'jhon', '123456', '', '', '', b'00'),
-(48, 'Ytzel', '321323', '', '', '', b'00'),
-(49, 'Ytzel', '123456', '', '', '', b'00'),
-(50, 'Elias', '123456', '', '', '', b'00');
+INSERT INTO `user` (`Id`, `username`, `password`, `gender`, `location`, `phone`, `role`) VALUES
+(1, 'admin', '739214\r\n', 'Mujer', 'Cochabamba', '72778767', b'01');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `category`
+-- Indices de la tabla `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product`
+-- Indices de la tabla `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `category_id_fk` (`category_id`);
 
 --
--- Indexes for table `technical_support`
+-- Indices de la tabla `technical_support`
 --
 ALTER TABLE `technical_support`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indices de la tabla `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`Id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `technical_support`
+-- AUTO_INCREMENT de la tabla `technical_support`
 --
 ALTER TABLE `technical_support`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `product`
+-- Filtros para la tabla `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `category_id_fk` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE;

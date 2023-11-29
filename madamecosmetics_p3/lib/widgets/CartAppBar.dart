@@ -4,7 +4,7 @@ class CartAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 247, 236, 135),
+      color: Color.fromRGBO(255, 235, 59, 1.0),
       padding: EdgeInsets.all(25),
       child: Row(children: [
         InkWell(

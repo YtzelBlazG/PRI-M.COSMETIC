@@ -89,7 +89,7 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                 ),
                                 Text(
-                                  "\$${cartItem.price}",
+                                  "${cartItem.price} \Bs",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

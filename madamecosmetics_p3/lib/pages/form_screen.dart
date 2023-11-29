@@ -13,7 +13,7 @@ class FormScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('FORMULARIO'),
+          title: Text('FORMULARIO', style: TextStyle(color: Colors.white),),
           backgroundColor: Colors.black,
           centerTitle: true,
         ),
@@ -65,7 +65,7 @@ class _YourFormWidgetState extends State<YourFormWidget> {
   }
 
   Future<void> enviarDatosAlServidor() async {
-    final url = Uri.parse('http://192.168.1.10/mysql/Report.php');
+    final url = Uri.parse('http://192.168.56.1/mysql/Report.php');
     try {
       final response = await http.post(
         url,

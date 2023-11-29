@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:madamecosmetics/models/Category.dart';
 import 'package:madamecosmetics/services/image_upload_service.dart';
-import 'package:madamecosmetics/services/notification_services.dart';
+//import 'package:madamecosmetics/services/notification_services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -51,7 +51,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   }
 
   Future<void> addProduct() async {
-    var url = Uri.parse("http://192.168.1.10/mysql/Productinsert.php");
+    var url = Uri.parse("http://192.168.56.1/mysql/Productinsert.php");
     try {
       // var appDocDir = await getApplicationDocumentsDirectory();
       // var localImagePath = '${appDocDir.path}/local_images';
@@ -170,23 +170,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 },
               ),
               SizedBox(height: 16.0),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Catalogo',
-                  labelStyle: TextStyle(fontSize: 16.0),
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: Colors.white70,
-                ),
-                onSaved: (value) => newItem['catalog'] = value!,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'El catálogo es obligatorio.';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16.0),
+              
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Stock',
@@ -305,7 +289,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    showNotification();
+                    //showNotification();
                     await addProduct();
                   }
                 },
@@ -361,7 +345,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
   }
 
   Future<void> updateProduct() async {
-    var url = Uri.parse("http://192.168.1.10/mysql/Productupdate.php");
+    var url = Uri.parse("http://192.168.56.1/mysql/Productupdate.php");
     try {
       var appDocDir = await getApplicationDocumentsDirectory();
       var localImagePath = '${appDocDir.path}/local_images';
@@ -401,7 +385,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
   }
 
   Future<void> deleteProduct() async {
-    var url = Uri.parse("http://192.168.1.10/mysql/Productdelete.php");
+    var url = Uri.parse("http://192.168.56.1/mysql/Productdelete.php");
     try {
       var response = await http.post(url, body: {
         "Id": updatedItem['id'].toString(),
