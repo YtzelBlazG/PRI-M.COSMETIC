@@ -51,7 +51,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   }
 
   Future<void> addProduct() async {
-    var url = Uri.parse("http://192.168.56.1/mysql/Productinsert.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/Productinsert.php");
     try {
       // var appDocDir = await getApplicationDocumentsDirectory();
       // var localImagePath = '${appDocDir.path}/local_images';
@@ -345,7 +345,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
   }
 
   Future<void> updateProduct() async {
-    var url = Uri.parse("http://192.168.56.1/mysql/Productupdate.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/Productupdate.php");
     try {
       var appDocDir = await getApplicationDocumentsDirectory();
       var localImagePath = '${appDocDir.path}/local_images';
@@ -385,7 +385,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
   }
 
   Future<void> deleteProduct() async {
-    var url = Uri.parse("http://192.168.56.1/mysql/Productdelete.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/Productdelete.php");
     try {
       var response = await http.post(url, body: {
         "Id": updatedItem['id'].toString(),

@@ -20,12 +20,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    futureProducts = fetchProductsByCategory();
+    futureProducts = fetchProductsByCategory(); 
   }
 
   Future<List<Product>> fetchProductsByCategory() async {
     var url = Uri.parse(
-        "http://192.168.56.1/mysql/CategoryInsert.php?category_id=${widget.categoryId}");
+        "http://192.168.1.64/mysql/CategoryInsert.php?category_id=${widget.categoryId}");
     try {
       var response = await http.get(url);
       print('Response status: ${response.statusCode}'); // Add this line

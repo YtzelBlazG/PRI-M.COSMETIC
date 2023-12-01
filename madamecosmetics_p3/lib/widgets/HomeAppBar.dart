@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:madamecosmetics/pages/login_screen.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -26,7 +25,8 @@ class HomeAppBar extends StatelessWidget {
           Spacer(),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "InformationScreen"); // Cambiado de "cartPage" a "InformationScreen"
+              Navigator.pushNamed(context,
+                  "InformationScreen"); // Cambiado de "cartPage" a "InformationScreen"
             },
             child: Icon(
               Icons.info,

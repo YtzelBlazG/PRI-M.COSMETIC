@@ -6,6 +6,7 @@ import 'package:madamecosmetics/pages/register_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
@@ -15,7 +16,7 @@ class LoginScreen extends StatelessWidget {
   static int aux = 0;
 
   Future<void> login(BuildContext context) async {
-    var url = Uri.parse("http://192.168.1.76/mysql/Login.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/Login.php");
     try {
       final response = await http.post(url, body: {
         "username": user.text,
@@ -160,8 +161,10 @@ class LoginScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         login(context);
-                        if (user.text == "admin") {
+                        if (user.text == "administrador") {
                           aux = 1;
+                        } else {
+                          aux = 0;
                         }
                         user.clear();
                         pass.clear();

@@ -65,7 +65,7 @@ class _YourFormWidgetState extends State<YourFormWidget> {
   }
 
   Future<void> enviarDatosAlServidor() async {
-    final url = Uri.parse('http://192.168.56.1/mysql/Report.php');
+    final url = Uri.parse('http://192.168.1.64/mysql/Report.php');
     try {
       final response = await http.post(
         url,

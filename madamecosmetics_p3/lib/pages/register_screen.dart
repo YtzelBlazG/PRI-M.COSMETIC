@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String message = "";
 
   Future<void> register() async {
-    var url = Uri.parse("http://192.168.1.76/mysql/Register.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/Register.php");
     try {
       var response = await http.post(url, body: {
         "username": user.text,
@@ -47,10 +47,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   bool validatePhoneNumber(String phoneNumber) {
-    RegExp regExp = RegExp(r'^\+?[0-7]+$');
-    return regExp.hasMatch(phoneNumber) &&
-        phoneNumber.length >= 8 &&
-        phoneNumber.length <= 30;
+    RegExp regExp = RegExp(r'^(\+\d{1,3}\s?)?\d{7,20}$');
+    return regExp.hasMatch(phoneNumber);
   }
 
   @override
@@ -342,9 +340,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             setState(() {
               message = "La contraseña debe tener al menos 6 caracteres.";
             });
-          } else if (user.text.toLowerCase() == 'admin') {
+          } else if (user.text.toLowerCase() == 'administrador') {
             setState(() {
-              message = 'No está permitido el nombre de usuario "admin".';
+              message =
+                  'No está permitido el nombre de usuario "administrador".';
             });
           } else if (!validatePhoneNumber(phone.text)) {
             setState(() {

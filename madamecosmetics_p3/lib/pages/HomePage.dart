@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchData() async {
-    var url = Uri.parse("http://192.168.56.1/mysql/SelectProduct.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/SelectProduct.php");
 
     try {
       final response = await http.get(url);
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<List<Category>> getCategory() async {
-    var url = Uri.parse("http://192.168.56.1/mysql/Categoryinsert.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/Categoryinsert.php");
     try {
       var response = await http.get(url);
       print("Respuesta del servidor: ${response.body}");

@@ -13,7 +13,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
   Category category = Category(id: 0, nameCategory: '');
 
   Future<void> addCategory() async {
-    var url = Uri.parse("http://192.168.56.1/mysql/CategoryInsert.php");
+    var url = Uri.parse("http://192.168.1.64/mysql/CategoryInsert.php");
     try {
       var response = await http.post(
         url,
